@@ -1,0 +1,61 @@
+package main
+
+@doc{*
+    This program does not have a specific matter to exist, 
+    although I need a certain score to pass LP.
+    By the way, Cyan seems pretty cool being a language 
+    considerably different from those I had more contact :).
+*}
+
+object Program
+
+    func run {
+
+        var String packagename = @compilationInfo#parsing("packagename") @pushCompilationContext(parsing0, "compilationInfo", "main", "C:\Users\gcres\Desktop\cyanTrab\main\Program.cyan", 14) "main" @popCompilationContext(parsing0, "cyan.lang", "String") ;
+
+        @insertCode{*
+            insert: """  "Initiating with @insertCode, let's see if I can make a good score with" println;""";
+        *}
+
+        Out println: (packagename);
+
+        var Int@range(1, 10) myNoteInThisWork;
+
+        var ok;
+        {
+            myNoteInThisWork = 11;
+            if (myNoteInThisWork > 10) {
+                throw Exception;
+            }
+        } catch: { (: Exception e :) ok = false };
+        
+        myNoteInThisWork = 9;
+
+    }
+
+ @pushCompilationContextStatement(pp1, pp) 
+
+    // Methods added by the compiler
+    override    func prototype -> Program {
+        @javacode{* return prototype;
+        *}
+    } 
+ @popCompilationContext(pp1) 
+ @pushCompilationContextStatement(new2, new) 
+    // Methods added by the compiler
+
+    override    func clone -> Program {
+        @javacode<<*
+        try {
+            return (_Program ) this.clone(); 
+        } catch (CloneNotSupportedException e) { }
+        return null;
+        *>>    } 
+    func init { } 
+
+    func new -> Program {
+        @javacode<**< 
+            return new _Program();        >**>
+    }
+ @popCompilationContext(new2) 
+end

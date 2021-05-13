@@ -1,0 +1,1 @@
+"C:\Program Files\Java\jdk1.8.0_271\bin\java" -cp "C:\Users\gcres\Desktop\Cyan\lib\cyan.lang.jar";"C:\Users\gcres\Desktop\Cyan\lib";"C:\Users\gcres\Desktop\java-for-cyanTrab";"C:\Users\gcres\Desktop\Cyan\lib\cyanruntime.jar"  main.Project
