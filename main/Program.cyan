@@ -7,28 +7,110 @@ package main
     considerably different from those I had more contact :).
 *}
 
+@createFieldIfAccessed
 object Program
+
+    var Int@range(0, 10) noteRangeMax = 10;
+    var Int@restrictTo{* self <= noteRangeMax *} myNoteInThisWork = 0;   
 
     func run {
 
         var String packagename = @compilationInfo("packagename");
 
         @insertCode{*
-            insert: """  "Initiating with @insertCode, let's see if I can make a good score with" println;""";
+            insert: """  "Initiating with @insertCode, let's see if I can make a good score with that package called " print;""";
         *}
 
         Out println: (packagename);
-
-        var Int@range(1, 10) myNoteInThisWork;
-
-        var ok = true;
-        {
-            myNoteInThisWork = 9;
-        } catch: { (: Exception e :) ok = false };
         
+        var ok = true;
+        myNoteInThisWork = 8;
+        if myNoteInThisWork > noteRangeMax { 
+            ok = false; 
+        }
 
         assert ok == true;
 
+        Out println: "Ok. My note is $myNoteInThisWork lets se how much I can increase it";
+
+        @callUnaryMethods(".*Test")
+        assert bonus == 3;
+
+        { 
+            myNoteInThisWork = myNoteInThisWork + bonus;
+        } catch: { (: CyException e :) 
+            Out println: "Hmmm, looks like I've got too much bonus. My note should be lower or equal to note range.";
+            ok = false;
+        };
+
+        assert ok == false;
+
+        Out println: "Ok, now I'm gonna try using a different technique";
+
+        self.integerBonus = 2;
+
+        bonus = self.integerBonus;
+
+        Out println: "Nice! My mind just created a new bonus: $bonus! Let's see if that works";
+
+        assert bonus == 2;
+
+        { 
+            myNoteInThisWork = myNoteInThisWork + bonus;
+            ok = true;
+        } catch: { (: CyException e :) 
+            ok = false;
+        };
+
+        if ok == true {
+            Out println: "Cool, my note is at $myNoteInThisWork";
+        }
+
+        Out println: "";
+        
+        isThisaShout;
+
+        Out println: "Oh, i didn't mean to shout. Hmm, actually maybe I did mean...";
+
+        Out println: "";
+        
+        Out println: "Suddently I just wanted to play with my note.";
+
+        var Int myFinalNote = 10base2;
+
+        assert 10base2 == 2;
+
+        var Int finalBonus = @eval("cyan.lang", "Int"){*
+            var Int count = 1;
+            for n in 1..6 {
+                count = count + 1;
+            }
+            return count;
+        *};
+
+        assert (finalBonus + myFinalNote) == 9;
+
+        Out println: "Thats it! My final note is: ";
+        printexpr myFinalNote + finalBonus;
+
+        var finally = { (: Int n :) ^n*01bin };
+
+        assert finally eval: 10 == 10;
+
+        Out println: "Just lost an entire point playing around. But that's ok, what matters is to learn.";
+    
+    }
+
+
+    func oneTest { ++bonus; Out println: "Bonus: $bonus"; }
+    func twoTest { ++bonus; Out println: "Bonus: $bonus"; }
+    func threeTest { ++bonus; Out println: "Bonus: $bonus" }
+    
+    var Int bonus = 0;
+
+    @shout
+    func isThisaShout {
+        Out println: "Maybe we can finish it for today?";
     }
 
 end
